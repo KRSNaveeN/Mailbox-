@@ -1,0 +1,39 @@
+.backdrop{
+    margin: auto;
+    max-width: 300px;
+    margin-top: 5%;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+   
+}
+.auth{
+    text-align: center;
+    margin: 1rem  0;
+    font-weight: bold;
+    
+}
+.siz{
+    width: 100%;
+}
+
+.toggle{
+    max-width: 300px;
+    border: 10x solid black;
+    border-radius: 10px;
+    /* background-color: burlywood; */
+    margin: auto;
+    margin-top: 1rem;
+    text-align: center;
+    
+    
+}
+.gaps{
+    margin : 5px 0;
+}
+
+.backdrop button{
+    margin-top: 5px;
+    text-align: center;
+
+}
