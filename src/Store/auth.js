@@ -2,7 +2,8 @@
 import {configureStore, createSlice} from '@reduxjs/toolkit';
 
 let logindata = {
-    login : true
+    login : true,
+    token : null
 }
 
 const loginslice = createSlice({
@@ -11,6 +12,9 @@ const loginslice = createSlice({
     reducers : {
         log(state){
             state.login = !state.login
+        },
+        token(state,action){
+            state.token = action.payload
         }
     }
 })

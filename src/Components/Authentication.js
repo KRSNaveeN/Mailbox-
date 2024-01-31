@@ -8,6 +8,7 @@ const Authentication = ()=>{
 
     const [validate,setValidate] = useState('');
     const login = useSelector((state)=>state.login);
+    
     const dispatch = useDispatch();
     
   const submitHandler = async (e)=>{
@@ -20,7 +21,7 @@ const Authentication = ()=>{
      }
      let url
      if(!login){
-        url = ""
+        url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB0RLysxCkfqR-gxhVXegua5OoXbqsTR-Q"
      }
      else{
         url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB0RLysxCkfqR-gxhVXegua5OoXbqsTR-Q"
@@ -33,6 +34,7 @@ const Authentication = ()=>{
      try{
         if(response.ok){
             let data = await response.json();
+            dispatch(authActions.token(data.idToken));
             console.log(data);
             console.log("success");
         }
