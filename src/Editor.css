@@ -1,0 +1,7 @@
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    height : 50vh;
+    /* height: 500px; Make the container take the full viewport height */
+  }
+  

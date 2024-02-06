@@ -35,6 +35,7 @@ const Authentication = ()=>{
         if(response.ok){
             let data = await response.json();
             dispatch(authActions.token(data.idToken));
+            dispatch(authActions.mail(data.email));
             console.log(data);
             console.log("success");
         }

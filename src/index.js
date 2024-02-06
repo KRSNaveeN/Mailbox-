@@ -6,6 +6,7 @@ import App from './App';
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import {Provider} from 'react-redux';
 import store from './Store/auth';
+import '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
