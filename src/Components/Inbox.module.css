@@ -1,0 +1,14 @@
+.inbox{
+    /* display : flex;
+    gap : 1rem;
+    margin: 1rem;
+    border : 1px solid black;
+    
+    justify-content: space-between;
+    width: 90vw; */
+    border-bottom: 1px solid black;
+}
+.cont{
+    width: 90vw;
+    background-color: aquamarine;
+}
