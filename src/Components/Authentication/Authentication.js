@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import classes from './Authentication.module.css';
-import { authActions } from '../Store/auth';
+import { authActions } from '../../Store/auth';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 const Authentication = ()=>{
 
     const [validate,setValidate] = useState('');
+    
+let email = useRef();
+let password = useRef();
     const login = useSelector((state)=>state.login);
     
     const dispatch = useDispatch();
@@ -56,8 +59,6 @@ const toggleHandler = ()=>{
     dispatch(authActions.log());
 }
 
-let email = useRef();
-let password = useRef();
     return<>
 
       <div className={classes.backdrop}>

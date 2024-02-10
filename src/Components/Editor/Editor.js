@@ -3,8 +3,10 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import the 
 
 
-const MyRichTextEditor = () => {
+const MyRichTextEditor = ({collectdata}) => {
   const [value1, setValue] = useState('');
+
+ 
 
   const handleChange = (html) => {
     setValue(html);
@@ -20,6 +22,7 @@ const MyRichTextEditor = () => {
   console.log(value1);
   let plainText = extractPlainText(value1);
   console.log(plainText);
+  collectdata(plainText);
  
   return (
     <div className='editor-container' >

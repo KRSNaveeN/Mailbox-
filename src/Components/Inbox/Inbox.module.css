@@ -1,0 +1,20 @@
+.inbox{
+    border-bottom: 1px solid black;
+}
+.cont{
+    width: 90vw;
+    /* background-color: aquamarine; */
+}
+.round{
+    border-radius: 50%;
+    background-color: blue;
+    width:10px;
+    height :10px;
+}
+.read{
+    border-radius: 50%;
+    color: red;
+    background-color: rgb(71, 71, 92);
+    width:10px;
+    height :10px;
+}
