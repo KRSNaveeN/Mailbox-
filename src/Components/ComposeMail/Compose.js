@@ -9,8 +9,11 @@ const Compose = () => {
     const [maildata, setMaildata] = useState('');
     const subjectRef = useRef();
 
-    const loginEmail = useSelector(state => state.email);
-    const trimmedLoginEmail = loginEmail.replace("@gmail.com", "");
+    const loginEmail = localStorage.getItem("logged");
+    let trimmedLoginEmail;
+    if(loginEmail){
+    trimmedLoginEmail = loginEmail.replace("@gmail.com", "");
+    }
 
     const dispatch = useDispatch();
 
@@ -18,7 +21,7 @@ const Compose = () => {
         e.preventDefault();
         const trimmedEmail = email.replace("@gmail.com", "");
         const data = {
-            email: trimmedEmail,
+            receiver: email.replace("@gmail.com" , ""),
             subject: subjectRef.current.value,
             read: false,
             id: generateUniqueId(),

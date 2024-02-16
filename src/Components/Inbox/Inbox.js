@@ -6,26 +6,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../../Store/auth";
 
 let Inbox = ()=>{
-  let loginemail =  useSelector(state =>state.email);
-    
+    let loginemail = localStorage.getItem("logged");
     let [names,setNames] = useState([]);
     let trimmedloginmail = loginemail.replace("@gmail.com", "");
     let dispatch = useDispatch();
+    let navigate = useNavigate();
     let allmail = useSelector(state=>state.allmail);
     let toggle = useSelector(state=> state.toggle);
     let token = useSelector(state=>state.token);
-    let count = useSelector(state=>state.count);
     let [update,setUpdate] = useState(true);
-    
-    console.log("token is: ",toggle);
-
 
     let Fetchingdata = async () => {
+        console.log(trimmedloginmail);
         try {
             const response = await fetch(`https://mailbox-76501-default-rtdb.firebaseio.com/${trimmedloginmail}/inbox.json`);
              if (!response.ok) {throw new Error('Failed to fetch data')}
-    
+             console.log(response);
             const data = await response.json();
+            console.log(data);
             let naames =  Object.keys(data);
         
             setNames(naames);
@@ -46,39 +44,22 @@ let Inbox = ()=>{
     
     useEffect(()=>{
          Fetchingdata();
+         console.log("inside fetching");
     }, [token,update]);
 
-
-    let navigate = useNavigate();
-
-
     let MailopenHandler = async (item)=>{
-       
         let index = allmail.findIndex((eachitem) => eachitem.id == item.id);
-    
         let x = names[index];
-      
-       
-        let  response = await fetch(`https://mailbox-76501-default-rtdb.firebaseio.com/${trimmedloginmail}/inbox/${x}.json`,{
+         let  response = await fetch(`https://mailbox-76501-default-rtdb.firebaseio.com/${trimmedloginmail}/inbox/${x}.json`,{
             method : "PATCH",
-            body : JSON.stringify({read : true}),
-        });
-        
-        
+            body : JSON.stringify({read : true})});
        setUpdate((pre)=>!pre);
        dispatch(authActions.toggle());
-         navigate(`/inbox/${item.id}`);
-       
-    }
+         navigate(`/inbox/${item.id}`); }
 
-    let deleteHandler = async (item)=>{
-       console.log("deleted");
-         
+    let deleteHandler = async (item)=>{  
        let index = allmail.findIndex((eachitem) => eachitem.id == item.id);
-    
        let x = names[index];
-     
-      
        let  response = await fetch(`https://mailbox-76501-default-rtdb.firebaseio.com/${trimmedloginmail}/inbox/${x}.json`,{
            method : "PATCH",
            body : JSON.stringify({delete : true, read : true})
@@ -91,12 +72,12 @@ let Inbox = ()=>{
     return<div className={classes.cont}>
        
        {
-        // emails.map((item)=>{    
+          
             allmail.map((item)=>{    
-            return <div className={classes.inbox}>
+            return <div key={Math.random()}>
                 
               {!item.delete &&  <Row> 
-                    <Col ><div className={item.read ? classes.read : classes.round}></div></Col>
+                    <Col ><div style={{marginTop:"7px"}} className={item.read ? classes.read : classes.round}></div></Col>
                     <Col xs={10} onClick={()=>MailopenHandler(item)}>
                         <Row>
                        <Col xs={2}>{item.sender}:</Col>
@@ -104,9 +85,12 @@ let Inbox = ()=>{
                         </Row>
                    </Col>
 
-                    <Col xs={1}><button  onClick={()=>deleteHandler(item)}>Delete</button></Col>
+                    <Col xs={1}><Button variant="danger"  onClick={()=>deleteHandler(item)}>Delete</Button></Col>
+                    <hr/>
                 </Row>}
+               
             </div>
+
         })
        }
     </div>

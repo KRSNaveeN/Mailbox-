@@ -43,7 +43,7 @@
   }
   .outlet{
     /* max-width: fit-content; */
-   width  :90%;
+    width  :90%;
     background-color: rgb(164, 166, 176);
   }
   .bar{

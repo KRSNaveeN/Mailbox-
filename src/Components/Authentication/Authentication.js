@@ -7,12 +7,13 @@ import { useRef } from 'react';
 const Authentication = ()=>{
 
     const [validate,setValidate] = useState('');
-    
-let email = useRef();
-let password = useRef();
-    const login = useSelector((state)=>state.login);
-    
     const dispatch = useDispatch();
+    const login = useSelector((state)=>state.login);
+     let email = useRef();
+     let password = useRef();
+   
+    
+    
     
   const submitHandler = async (e)=>{
     e.preventDefault();
@@ -23,6 +24,7 @@ let password = useRef();
         returnSecureToken : true
      }
      let url
+     try{
      if(!login){
         url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB0RLysxCkfqR-gxhVXegua5OoXbqsTR-Q"
      }
@@ -34,13 +36,12 @@ let password = useRef();
         body : JSON.stringify(data)
      });
 
-     try{
+     
         if(response.ok){
             let data = await response.json();
             dispatch(authActions.token(data.idToken));
             dispatch(authActions.mail(data.email));
-            console.log(data);
-            console.log("success");
+            localStorage.setItem("logged", (data.email).replace("@gmail.com", ""));   
         }
         else
         {

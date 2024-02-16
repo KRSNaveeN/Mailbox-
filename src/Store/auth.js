@@ -3,7 +3,7 @@ import {configureStore, createSlice} from '@reduxjs/toolkit';
 
 let logindata = {
     login : true,
-    token : null,
+    token : localStorage.getItem("logged"),
     email : '',
     allmail : [],
     receivedmail : [],
@@ -39,7 +39,7 @@ const loginslice = createSlice({
     }
 })
 
-
+console.log(logindata.token);
 
 let store = configureStore({
     reducer : loginslice.reducer
